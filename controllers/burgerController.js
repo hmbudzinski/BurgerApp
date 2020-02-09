@@ -9,8 +9,11 @@ router.get("/", function(req, res) {
     });
   });
   
+  //POSt to api/burgers
   router.post("/api/burgers", function(req, res) {
-    burger.create([
+    //{name: any burger, devoured: "1"}
+
+    burger.insertOne([
       "name", "devoured"
     ], [
       req.body.name, req.body.devoured
@@ -25,8 +28,8 @@ router.get("/", function(req, res) {
   
     console.log("condition", condition);
   
-    burger.update({
-      sleepy: req.body.devoured
+    burger.updateOne({
+      devoured: req.body.devoured
     }, condition, function(result) {
       if (result.changedRows == 0) {
         // If no rows were changed, then the ID must not exist, so 404
