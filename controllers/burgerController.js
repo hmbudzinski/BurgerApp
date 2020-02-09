@@ -4,17 +4,15 @@ var burger = require("../models/burger.js");
 
 router.get("/", function(req, res) {
   //calling burger.all(cb)
-    burger.all(function(data) {
+    burger.selectAll(function(data) {
       res.render("index", {burgers: data});
     });
   });
   
   //POSt to api/burgers
   router.post("/api/burgers", function(req, res) {
-    //{name: any burger, devoured: "1"}
-
     burger.insertOne([
-      "name", "devoured"
+      "burger_name", "devoured"
     ], [
       req.body.name, req.body.devoured
     ], function(result) {
